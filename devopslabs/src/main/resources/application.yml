@@ -1,0 +1,28 @@
+server:
+  port: 5000
+  error:
+    include-message: always
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/devopslabs
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+app:
+  cors:
+    allowed-origins: "*"
