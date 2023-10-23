@@ -3,7 +3,7 @@ package com.example.devopslabs.movie;
 import com.example.devopslabs.movie.dto.AddMovieRequestDto;
 import com.example.devopslabs.movie.dto.MovieDto;
 import com.example.devopslabs.movie.dto.UpdateMovieRequestDto;
-import com.example.devopslabs.movie.exception.MovieNotFoundException;
+import com.example.devopslabs.movie.exception.*;
 import com.example.devopslabs.movie.mapper.MovieMapper;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +29,12 @@ public class MovieService {
     }
 
     public MovieDto addMovie(AddMovieRequestDto dto) {
+        String title = dto.getTitle();
+
+        if (movieRepository.existsByTitle(title)) {
+            throw new MovieAlreadyExistsException(title);
+        }
+
         Movie movie = movieMapper.addMovieRequestDtoToMovie(dto);
         movie = movieRepository.save(movie);
         return movieMapper.movieToMovieDto(movie);
@@ -46,5 +52,9 @@ public class MovieService {
         movie = movieMapper.updateMovieRequestDtoToMovie(dto, movie);
         movie = movieRepository.save(movie);
         return movieMapper.movieToMovieDto(movie);
+    }
+
+    public List<MovieDto> findByDirectorOrderByReleaseYearDesc(String director) {
+        return movieRepository.findByDirectorOrderByReleaseYearDesc(director).stream().map(movieMapper::movieToMovieDto).toList();
     }
 }

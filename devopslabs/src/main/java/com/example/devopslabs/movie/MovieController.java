@@ -44,4 +44,9 @@ public class MovieController {
     public MovieDto updateMovie(@Valid @RequestBody UpdateMovieRequestDto dto) {
         return movieService.updateMovie(dto);
     }
+
+    @GetMapping("/director/{director}")
+    public List<MovieDto> findByDirectorOrderByReleaseYearDesc(@PathVariable String director) {
+        return movieService.findByDirectorOrderByReleaseYearDesc(director);
+    }
 }

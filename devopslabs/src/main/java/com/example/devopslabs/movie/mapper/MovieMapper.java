@@ -11,7 +11,9 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface MovieMapper {
     MovieDto movieToMovieDto(Movie movie);
-    @Mapping(target ="id", ignore = true)
+
+    @Mapping(target = "id", ignore = true)
     Movie addMovieRequestDtoToMovie(AddMovieRequestDto addMovieRequestDto);
+
     Movie updateMovieRequestDtoToMovie(UpdateMovieRequestDto updateMovieRequestDto, @MappingTarget Movie movie);
 }

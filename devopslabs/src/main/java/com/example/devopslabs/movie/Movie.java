@@ -1,6 +1,8 @@
 package com.example.devopslabs.movie;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,16 +25,22 @@ public class Movie {
     )
     private Integer id;
 
+    @NotBlank
+    @Column(nullable = false, unique = true)
     private String title;
+
+    @NotBlank
+    @Column(nullable = false)
     private String director;
-    private Integer year;
+
+    @NotNull
+    @Column(nullable = false)
+    private Integer releaseYear;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "createdAt", nullable = false)
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
 
     @PrePersist
@@ -43,5 +51,11 @@ public class Movie {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = new Date();
+    }
+
+    public Movie(String title, String director, Integer releaseYear) {
+        this.title = title;
+        this.director = director;
+        this.releaseYear = releaseYear;
     }
 }

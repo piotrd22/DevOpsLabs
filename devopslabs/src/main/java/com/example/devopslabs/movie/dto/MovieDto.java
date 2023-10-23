@@ -13,7 +13,7 @@ public class MovieDto {
     private Integer id;
     private String title;
     private String director;
-    private Integer year;
+    private Integer releaseYear;
     private Date createdAt;
     private Date updatedAt;
 }
