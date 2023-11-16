@@ -7,7 +7,8 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/devopslabs
+#    url: jdbc:postgresql://localhost:5432/devopslabs
+    url: jdbc:postgresql://postgresdb:5432/devopslabs
     username: postgres
     password: password
   jpa:
