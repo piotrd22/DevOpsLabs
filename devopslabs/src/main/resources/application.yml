@@ -1,0 +1,36 @@
+server:
+  port: ${DEVOPSLABS_PORT:5000}
+  error:
+    include-message: always
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+#    url: jdbc:postgresql://postgresdb:5432/devopslabs
+#    username: devopslabs
+#    password: devopslabs
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+#  Custom paths for docs
+#  /api/api-docs
+#  /api/swagger-ui
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui
+
+logging:
+  level:
+    org.springframework.security: DEBUG

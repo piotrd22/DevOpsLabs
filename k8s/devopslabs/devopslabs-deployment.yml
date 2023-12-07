@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devopslabs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devopslabs
+  template:
+    metadata:
+      labels:
+        app: devopslabs
+    spec:
+      containers:
+        - name: devopslabs-container
+          image: piotrdamrych/devopslabs:latest
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: devopslabs-config
+            - secretRef:
+                name: devopslabs-secrets
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"

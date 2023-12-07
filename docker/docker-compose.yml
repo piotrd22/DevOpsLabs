@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  devopslabs-api:
+    container_name: devopslabs-api
+    build: ../devopslabs
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgresdb
+
+  postgresdb:
+    container_name: postgresdevopslabs
+    build: ./postgres
+    # they shouldn't be visible :)
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgresdevopslabs
+    volumes:
+      - postgresdb:/data/postgresdevopslabs
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+
+  # docker exec -it postgresdevopslabs psql -U postgres
+  # CREATE DATABASE devopslabs;
+
+volumes:
+  postgresdb:
