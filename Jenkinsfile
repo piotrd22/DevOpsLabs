@@ -17,7 +17,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    def dockerfilePath = '/home/ubuntu/jenkins/workspace/damrych_devopslabs_main/devopslabs'
+                    def dockerfilePath = '${WORKSPACE}/devopslabs'
 
                     def dockerfile = "${dockerfilePath}/Dockerfile"
 
